@@ -1,0 +1,120 @@
+package com.shinhan.day02;
+
+public class OperatorTest {
+
+	public static void main(String[] args) {
+//		f1();
+//		f2();
+//		f3();
+//		f4();
+//		f5();
+//		f6();
+		double x = 5.0;
+		double y = 0.0;
+		double z = 5%y;
+		if (Double.isNaN(z)) {
+			System.out.println("0.0으로 나눌수없습니다.");
+		}
+	}
+	
+	
+	private static void f6() {
+		int a = 10;
+		boolean b = a%2 == 0;
+		String s = b? "짝":"홀";
+		System.out.println(s);
+		
+	}
+
+
+	private static void f5() {
+		int a = 10;
+		a++;
+		++a;
+		a += 20;
+		System.out.println(a);
+	}
+
+
+	private static void f4() {
+		// String은 변경 불가능함
+		System.out.println("참조형 비교");
+		String s1 = "AB";
+		String s2 = "AB";
+		// 컴파일 시점에서 결정돼서 두 참조값이 같음
+		System.out.println(s1==s2);
+		System.out.println(System.identityHashCode(s1));
+		System.out.println(System.identityHashCode(s2));
+		// String이 변경된게 아님
+		// 런타임에 스트링 버퍼에 "자바".append("프로그램") 한 뒤에 새롭게 생성하고 그곳을 참조함 = 주소가 달라짐
+		s1 = s1+"프로그램";
+		s2 = s2+"프로그램";
+		System.out.println(s1==s2);
+		System.out.println(System.identityHashCode(s1));
+		System.out.println(System.identityHashCode(s2));
+		System.out.println(s1.equals(s2));
+	}
+
+
+	private static void f3() {
+		System.out.println("기본형 비교");
+		int a = 10;
+		int b = 20;
+		char ch1 = 'A';
+		char ch2 = 'A';
+		
+		System.out.println(a==b);
+		System.out.println(a!=b);
+		
+		System.out.println(ch1==ch2);
+		System.out.println(ch1!=ch2);
+	}
+
+
+	private static int call() {
+		return 0;
+	}
+
+	
+	private static double call2() {
+		return 0.0;
+	}
+	
+
+	private static void f2() {
+		int a = 10;
+//		int b = 0;
+		int b = 2;
+		// 0으로 나눌 수 없음
+		double c = 0.0;
+		float d = 0.0f;
+		// 소수 0.0으로 나누면 Infinity가 나옴
+		// 나머지 연산은 NaN이 나옴
+		System.out.println(a/b);
+		System.out.println(a/c);
+		System.out.println(a/d);
+		System.out.println(a%d);
+		
+//		int e = call();
+//		System.out.println(Double.isInfinite(a/e));
+//		System.out.println(Double.isNaN(a/e));
+
+		double f = call2();
+		System.out.println(Double.isInfinite(a/f));
+		System.out.println(Double.isNaN(a/f));
+		
+		System.out.println("f2함수 종료");
+	}
+
+
+
+	private static void f1() {
+		int a = 10;
+		a = a + 1;
+		a++;
+		++a;
+		System.out.println(a++);
+		System.out.println(++a);
+	}
+
+}

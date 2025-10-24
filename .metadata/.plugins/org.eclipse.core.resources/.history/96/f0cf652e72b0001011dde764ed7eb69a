@@ -1,0 +1,62 @@
+package com.shinhan.day01;
+
+public class VarPractice {
+	
+	// 기본형: boolean, byte, short, char, int, long, float, double
+
+	public static void main(String[] args) {
+		f1();
+		f2();
+		f3();
+		f4();
+		f5();
+		f1();
+		f1();
+
+	}
+
+	private static void f1() {
+		System.out.println("int");
+		int var1 = Integer.MAX_VALUE;
+		System.out.println(var1);
+		var1++;
+		System.out.println(var1);
+	}
+	
+	private static void f2() {
+		System.out.println("int");
+		int var1 = Integer.MAX_VALUE;
+		System.out.println(var1);
+		var1++;
+		System.out.println(var1);
+		
+	}
+	
+	private static void f3() {
+		System.out.println("int");
+		int var1 = Integer.MAX_VALUE;
+		System.out.println(var1);
+		var1++;
+		System.out.println(var1);
+		
+	}
+	
+	private static void f4() {
+		System.out.println("int");
+		int var1 = Integer.MAX_VALUE;
+		System.out.println(var1);
+		var1++;
+		System.out.println(var1);
+		
+	}
+	
+	private static void f5() {
+		System.out.println("int");
+		int var1 = Integer.MAX_VALUE;
+		System.out.println(var1);
+		var1++;
+		System.out.println(var1);
+		
+	}
+
+}

@@ -1,0 +1,11 @@
+package com.shinhan.day01;
+
+import java.io.InputStream;
+
+public class KeyInput {
+
+	public static void main(String[] args) {
+		
+	}
+
+}

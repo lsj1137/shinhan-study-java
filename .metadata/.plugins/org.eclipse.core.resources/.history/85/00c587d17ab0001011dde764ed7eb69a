@@ -1,0 +1,19 @@
+package com.shinhan.day02;
+
+public class OperatorTest {
+
+	public static void main(String[] args) {
+		f1();
+
+	}
+
+	private static void f1() {
+		int a = 10;
+		a = a + 1;
+		a++;
+		++a;
+		System.out.println(a++);
+		System.out.println(++a);
+	}
+
+}

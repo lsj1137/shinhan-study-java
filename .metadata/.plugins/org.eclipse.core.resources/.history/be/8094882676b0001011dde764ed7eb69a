@@ -1,0 +1,53 @@
+package com.shinhan.day01;
+
+public class TypeConverting {
+
+	public static void main(String[] args) {
+		f1();
+		f2();
+		f3();
+		f1();
+		f1();
+		f1();
+		f1();
+
+	}
+
+	private static void f1() {
+		int var1 = 100;
+		long var2 = var1;
+		System.out.println(var2);
+//		long var3 = 100;
+//		int var4 = var3; 에러
+	}
+	private static void f2() {
+		int var1 = 2147483647; //Integer.MAX_VALUE+1
+//		long var2 = 2147483648; // 자바 정수 리터럴은 int형임
+		long var2 = var1 + 1;
+		System.out.println(var2);
+		long var3 = (long) var1 + 1;
+		System.out.println(var3);
+		
+	}
+	private static void f3() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void f4() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void f5() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void f6() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void f7() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,32 @@
+package com.shinhan.day02;
+
+public class Review {
+	public static void main(String[] args) {
+		q1();
+	}
+
+	private static void q1() {
+		// 변수
+		// 1. 선언 : 변수의 성격(타입)을 정해줘야 함.
+		int var1;
+		int[] var2 = {10, 20, 30};
+		// 2. 초기화
+		var1 = 100;
+		// 3. 사용
+		System.out.println("var1 = "+var1);
+		char charValue = 'a';
+		double doubleValue = 5.7;
+		String strValue = "A";
+		double var3 = (double) var1;
+		byte var4 = (byte) var1;
+		int var5 = (int) doubleValue;
+		// char var6 = (char) strValue;
+		// String class는 강제형변환 x 기능을 이용함.
+		char var6 = strValue.charAt(0);
+		System.out.println(var6);
+		
+		
+	}
+	
+	
+}

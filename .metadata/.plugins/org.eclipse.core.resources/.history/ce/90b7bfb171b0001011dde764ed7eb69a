@@ -1,0 +1,43 @@
+package com.shinhan.day01;
+
+public class VarPractice {
+	
+	// 기본형: boolean, byte, short, char, int, long, float, double
+
+	public static void main(String[] args) {
+		f1();
+		f2();
+		f3();
+		f4();
+		f5();
+		f1();
+		f1();
+
+	}
+
+	private static void f1() {
+		System.out.println("");
+		
+	}
+	
+	private static void f2() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private static void f3() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private static void f4() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private static void f5() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

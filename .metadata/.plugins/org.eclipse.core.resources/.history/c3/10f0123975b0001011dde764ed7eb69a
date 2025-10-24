@@ -1,0 +1,49 @@
+package com.shinhan.day01;
+
+public class TypeConverting {
+
+	public static void main(String[] args) {
+		f1();
+		f1();
+		f1();
+		f1();
+		f1();
+		f1();
+		f1();
+
+	}
+
+	private static void f1() {
+		int var1 = 100;
+		long var2 = var1;
+		System.out.println(var2);
+//		long var3 = 100;
+//		int var4 = var3; 에러
+		
+	}
+	private static void f1() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void f1() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void f1() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void f1() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void f1() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void f1() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
