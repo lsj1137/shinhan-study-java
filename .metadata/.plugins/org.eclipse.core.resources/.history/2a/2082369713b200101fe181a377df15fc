@@ -1,0 +1,8 @@
+package com.shinhan.week01homework;
+
+public class Lab4_3 {
+	public static void main(String[] args) {
+		q1();
+		q2();
+	}
+}

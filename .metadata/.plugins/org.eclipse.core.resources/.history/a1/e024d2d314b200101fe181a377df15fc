@@ -1,0 +1,98 @@
+package com.shinhan.week01homework;
+
+import java.util.Scanner;
+
+public class Ch4_LAB1 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		q1();
+		q2();
+		q3();
+		q4();
+		q5();
+		sc.close();
+	}
+	
+	private static void q5(Scanner sc) {
+		System.out.print("직각 역삼각형을 출력할 줄 수: ");
+		int line = Integer.parseInt(sc.nextLine());
+		
+		for (int i=0; i<line; i++) {
+			String stars = "";
+			for (int j=0; j<line-i; j++) {
+				stars += '*';
+			}
+			System.out.println(stars);
+		}
+		
+	}
+
+	public static void hokeyGraphics(char cell, int size, boolean isRect)
+    {
+		for (int i=0; i<size; i++) {
+			String line = "";
+			for (int j=0; j< (isRect ? size : i+1); j++) {
+				line += cell;
+			}
+			System.out.println(line);
+		}
+    }
+
+
+	private static void q4() {
+		hokeyGraphics('*', 4, false); 
+		System.out.println("====================");
+		hokeyGraphics('%', 3, true); 
+		System.out.println("====================");
+		hokeyGraphics('$', 5, false); 
+		System.out.println("====================");
+		hokeyGraphics('*', 4, true); 
+		System.out.println("====================");
+		hokeyGraphics('@', 2, false); 
+	}
+
+	private static void q3() {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("숫자를 입력하세요. : ");
+		int i = Integer.parseInt(sc.nextLine());
+		int total = 0;
+		int start = i % 2;
+		for (int j=start; j<=i; j+=2) {
+			total += j;
+		}
+		System.out.printf("결과 값 : %d\n", total);
+	}
+
+	private static void q2() {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("문자열을 입력하세요. : ");
+		String s = sc.nextLine().toUpperCase();
+		for (int i=1; i<s.length()+1; i++) {
+			System.out.println(s.substring(0, i));
+		}
+	}
+
+	private static void q1() {
+		Scanner sc = new Scanner(System.in);
+		int i, limit, step, total=0;
+		System.out.print("초기값을 정수로 입력하세요. : ");
+		i = Integer.parseInt(sc.nextLine());
+
+		System.out.print("마지막 값을 정수로 입력하세요. : ");
+		limit = Integer.parseInt(sc.nextLine());
+
+		System.out.print("증가분을 정수로 입력하세요. : ");
+		step = Integer.parseInt(sc.nextLine());
+		
+		for (int j=i; j<=limit; j+=step) {
+			total += j;
+		}
+		
+		if (total>1000) {
+			total += 2000;
+		}
+		
+		System.out.printf("총합은 %d 입니다.", total);
+		
+	}
+}

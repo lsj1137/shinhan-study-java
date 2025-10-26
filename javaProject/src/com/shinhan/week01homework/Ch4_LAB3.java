@@ -1,0 +1,45 @@
+package com.shinhan.week01homework;
+
+public class Ch4_LAB3 {
+	public static void main(String[] args) {
+		System.out.println("======= Q1 =======");
+		q1();
+		System.out.println("======= Q2 =======");
+		q2();
+	}
+	
+	private static void abs(int num1, int num2) {
+		int gap = num1-num2;
+		if (gap<0) {
+			gap *= -1;
+		}
+		System.out.println(gap);	
+	}
+
+	private static void q2() {
+		abs(5,10);
+		abs(15,10);
+		abs(8,8);
+		abs(1,10);
+		abs(63,21);
+	}
+
+	private static void printSeason(int month) {
+		String season = switch (month) {
+		case 3,4,5 -> "봄에 태어나셨네요.";
+		case 6,7,8 -> "여름에 태어나셨네요.";
+		case 9,10,11 -> "가을에 태어나셨네요.";
+		case 12,1,2 -> "겨울에 태어나셨네요.";
+		default -> "1~12 사이의 숫자만 입력하셔야 합니다.";
+		};
+		System.out.println(season);
+	}
+	
+	private static void q1() {
+		printSeason(4);
+		printSeason(6);
+		printSeason(9);
+		printSeason(12);
+		printSeason(15);
+	}
+}

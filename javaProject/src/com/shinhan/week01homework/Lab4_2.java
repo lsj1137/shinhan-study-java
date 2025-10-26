@@ -1,5 +1,0 @@
-package com.shinhan.week01homework;
-
-public class Lab4_2 {
-
-}

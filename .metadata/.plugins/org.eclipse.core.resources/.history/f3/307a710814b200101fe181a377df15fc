@@ -1,0 +1,24 @@
+package com.shinhan.week01homework;
+
+public class Lab4_3 {
+	public static void main(String[] args) {
+		q1();
+		q2();
+	}
+
+	private static void q2() {
+		
+		
+	}
+
+	private static void q1(int month) {
+		String season = switch (month) {
+		case 3,4,5 -> "봄에 태어나셨네요.";
+		case 6,7,8 -> "여름에 태어나셨네요.";
+		case 9,10,11 -> "가을에 태어나셨네요.";
+		case 12,1,2 -> "겨울에 태어나셨네요.";
+		default -> "1~12 사이의 숫자만 입력하셔야 합니다.";
+		};
+		System.out.println(season);
+	}
+}

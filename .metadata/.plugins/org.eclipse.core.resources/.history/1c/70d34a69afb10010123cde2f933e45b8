@@ -1,0 +1,59 @@
+package com.shinhan.week01homework;
+
+import java.util.Scanner;
+
+public class Lab4_1 {
+	public static void main(String[] args) {
+//		q1();
+//		q2();
+		q3();
+	}
+
+	private static void q3() {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("숫자를 입력하세요. : ");
+		int i = Integer.parseInt(sc.nextLine());
+		int total = 0;
+		int start = i % 2;
+		for (int j=start; j<=i; j+=2) {
+			total += j;
+		}
+		System.out.printf("결과 값 : %d\n", total);
+		sc.close();
+	}
+
+	private static void q2() {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("문자열을 입력하세요. : ");
+		String s = sc.nextLine().toUpperCase();
+		for (int i=1; i<s.length()+1; i++) {
+			System.out.println(s.substring(0, i));
+		}
+		sc.close();
+	}
+
+	private static void q1() {
+		Scanner sc = new Scanner(System.in);
+		int i, limit, step, total=0;
+		System.out.print("초기값을 정수로 입력하세요. : ");
+		i = Integer.parseInt(sc.nextLine());
+
+		System.out.print("마지막 값을 정수로 입력하세요. : ");
+		limit = Integer.parseInt(sc.nextLine());
+
+		System.out.print("증가분을 정수로 입력하세요. : ");
+		step = Integer.parseInt(sc.nextLine());
+		
+		for (int j=i; j<=limit; j+=step) {
+			total += j;
+		}
+		
+		if (total>1000) {
+			total += 2000;
+		}
+		
+		System.out.printf("총합은 %d 입니다.", total);
+		
+		sc.close();
+	}
+}
