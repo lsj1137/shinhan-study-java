@@ -1,7 +1,7 @@
 package com.shinhan.day05;
 
 public class CustomerManager {
-	int MAX_NUM = 100;
+	final int MAX_NUM = 100;
 	Customer[] customers = new Customer[MAX_NUM];
 	int seq = 0;
 	
