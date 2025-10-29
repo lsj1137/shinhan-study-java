@@ -2,8 +2,8 @@ package com.shinhan.day05;
 
 public class Ch6_LAB5 {
 	public static void main(String[] args) {
-		q1();
-		q2();
+//		q1();
+//		q2();
 		
 	}
 
@@ -114,5 +114,3 @@ class Employee {
 				+ "원 입니다.";
 	}
 }
-
-

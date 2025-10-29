@@ -7,3 +7,6 @@
 1761548999902	Extract method 'q1'
 1761697125972	Extract method 'f1'
 1761700567811	Rename type 'CustomerManage'
+1761726824422	Rename type 'Account'
+1761726851531	Delete element
+1761727730388	Rename type 'BankApplication'
