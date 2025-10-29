@@ -95,11 +95,9 @@ public class Ch4_LAB2 {
 		System.out.print("양의 정수를 입력하세요 : ");
 		int num = Integer.parseInt(sc.nextLine());
 		int count = 0, total = 0;
-		for (int i = 1; i < 1001; i++) {
-			if (i % num == 0) {
-				count += 1;
-				total += i;
-			}
+		for (int i = num; i < 1001; i+=num) {
+			count += 1;
+			total += i;
 		}
 		System.out.println(num + "의 배수 개수 = " + count);
 		System.out.println(num + "의 배수 합 = " + total);
