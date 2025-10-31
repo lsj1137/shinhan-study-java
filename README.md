@@ -22,5 +22,8 @@ do while
 블럭 (Block)
 정적 블럭 (Static Block)
 
-- 오버로딩
-- 오버라이딩
+- 오버로딩 (Overloading)
+- 오버라이딩 (Overriding)
+- 형변환
+- 추상클래스 (Abstract Class)
+- 봉인된 클래스 (Sealed Class)

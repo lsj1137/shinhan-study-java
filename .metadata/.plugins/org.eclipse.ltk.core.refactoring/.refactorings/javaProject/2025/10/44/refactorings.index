@@ -27,3 +27,9 @@
 1761808638992	Move compilation unit
 1761808669085	Rename type 'Single'
 1761810278013	Rename package 'com.shinhan.day06.LAB'
+1761870659660	Copy compilation units
+1761887633609	Copy package
+1761887648109	Rename package 'com.shinhan.practice_exam.copy'
+1761888785743	Move compilation unit
+1761892922809	Rename method 'checkLevel'
+1761895200114	Delete element

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.lang.ArrayStoreException"/>
-    <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
@@ -10,4 +8,23 @@
     <fullyQualifiedTypeName name="java.util.Set"/>
     <fullyQualifiedTypeName name="com.shinhan.day05.Employee2"/>
     <fullyQualifiedTypeName name="com.shinhan.day05.MemberService"/>
+    <fullyQualifiedTypeName name="com.shinhan.day06.MemberVO"/>
+    <fullyQualifiedTypeName name="com.shinhan.day06.MemberService"/>
+    <fullyQualifiedTypeName name="com.shinhan.day06.MemberDAO"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="com.shinhan.day06.AccountService"/>
+    <fullyQualifiedTypeName name="com.shinhan.day06.inheritance.CheckingAccount"/>
+    <fullyQualifiedTypeName name="com.shinhan.day06.inheritance.Parent"/>
+    <fullyQualifiedTypeName name="com.shinhan.day06.ShopService"/>
+    <fullyQualifiedTypeName name="java.lang.ProcessHandle.Info"/>
+    <fullyQualifiedTypeName name="java.lang.Math"/>
+    <fullyQualifiedTypeName name="com.shinhan.day07.CheckingAccount"/>
+    <fullyQualifiedTypeName name="com.shinhan.day07.interfaces.MyInterface"/>
+    <fullyQualifiedTypeName name="java.lang.ArrayStoreException"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="com.shinhan.day07.Ch8_LAB2.Shape"/>
+    <fullyQualifiedTypeName name="javax.annotation.processing.AbstractProcessor"/>
+    <fullyQualifiedTypeName name="com.shinhan.day07.Ch8_LAB2.Resizeable"/>
+    <fullyQualifiedTypeName name="com.shinhan.day07.Ch8_LAB2.RectTriangle"/>
+    <fullyQualifiedTypeName name="com.shinhan.day07.Ch8_LAB2.Rectangle"/>
 </qualifiedTypeNameHistroy>
