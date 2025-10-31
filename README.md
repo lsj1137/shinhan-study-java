@@ -1,4 +1,5 @@
 # shinhan-study-java
+
 ## 01 주차
 ### 자바 프로그래밍 기초
 환경 세팅 (JDK 설치, 환경변수 설정, 이클립스 설치, 프로젝트 생성)
@@ -14,6 +15,7 @@ switch - case
 if
 while
 do while
+
 ## 2주차
 ### 1. 클래스 (Class)
 필드 (Field)
@@ -27,3 +29,4 @@ do while
 - 형변환
 - 추상클래스 (Abstract Class)
 - 봉인된 클래스 (Sealed Class)
+### 2. 인터페이스 (Interface)
