@@ -28,4 +28,19 @@
     <fullyQualifiedTypeName name="com.shinhan.day07.Ch8_LAB2.RectTriangle"/>
     <fullyQualifiedTypeName name="com.shinhan.day07.Ch8_LAB2.Rectangle"/>
     <fullyQualifiedTypeName name="com.shinhan.day07.check_problems.DataAccessObject"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="java.io.InputStream"/>
+    <fullyQualifiedTypeName name="java.io.FileReader"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="java.lang.AutoCloseable"/>
+    <fullyQualifiedTypeName name="com.shinhan.day09.MyResource"/>
+    <fullyQualifiedTypeName name="javax.sql.DataSource"/>
+    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.Getter"/>
+    <fullyQualifiedTypeName name="lombok.Setter"/>
+    <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
+    <fullyQualifiedTypeName name="lombok.RequiredArgsConstructor"/>
+    <fullyQualifiedTypeName name="com.shinhan.day09.check_problem.StudentExample"/>
+    <fullyQualifiedTypeName name="lombok.EqualsAndHashCode"/>
 </qualifiedTypeNameHistroy>
