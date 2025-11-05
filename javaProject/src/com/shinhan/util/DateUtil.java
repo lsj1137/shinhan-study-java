@@ -1,10 +1,25 @@
 package com.shinhan.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class DateUtil {
 	public static java.sql.Date convertToSQLDate(Date dt) {
 		java.sql.Date dt2 = new java.sql.Date(dt.getTime());
+		return dt2;
+	}
+	public static java.sql.Date convertToSQLDate(String dt) {
+		SimpleDateFormat sdf = new SimpleDateFormat("");
+		Date d;
+		java.sql.Date dt2 = null;
+		try {
+			d = sdf.parse(dt);
+			dt2 = new java.sql.Date(d.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		return dt2;
 	}
 	

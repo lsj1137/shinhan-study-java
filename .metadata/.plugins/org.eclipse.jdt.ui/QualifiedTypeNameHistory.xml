@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="java.time.LocalDate"/>
-    <fullyQualifiedTypeName name="com.shinhan.day05.Computer"/>
-    <fullyQualifiedTypeName name="com.shinhan.day05.Keyboard"/>
-    <fullyQualifiedTypeName name="java.util.Set"/>
-    <fullyQualifiedTypeName name="com.shinhan.day05.Employee2"/>
-    <fullyQualifiedTypeName name="com.shinhan.day05.MemberService"/>
-    <fullyQualifiedTypeName name="com.shinhan.day06.MemberVO"/>
-    <fullyQualifiedTypeName name="com.shinhan.day06.MemberService"/>
-    <fullyQualifiedTypeName name="com.shinhan.day06.MemberDAO"/>
-    <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="com.shinhan.day06.AccountService"/>
     <fullyQualifiedTypeName name="com.shinhan.day06.inheritance.CheckingAccount"/>
     <fullyQualifiedTypeName name="com.shinhan.day06.inheritance.Parent"/>
     <fullyQualifiedTypeName name="com.shinhan.day06.ShopService"/>
     <fullyQualifiedTypeName name="java.lang.ProcessHandle.Info"/>
-    <fullyQualifiedTypeName name="java.lang.Math"/>
     <fullyQualifiedTypeName name="com.shinhan.day07.CheckingAccount"/>
     <fullyQualifiedTypeName name="com.shinhan.day07.interfaces.MyInterface"/>
     <fullyQualifiedTypeName name="java.lang.ArrayStoreException"/>
@@ -27,7 +15,6 @@
     <fullyQualifiedTypeName name="com.shinhan.day07.Ch8_LAB2.Rectangle"/>
     <fullyQualifiedTypeName name="com.shinhan.day07.check_problems.DataAccessObject"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
-    <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="java.io.FileReader"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="java.lang.AutoCloseable"/>
@@ -48,10 +35,29 @@
     <fullyQualifiedTypeName name="com.shinhan.practice_exam.MinusAccount"/>
     <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
     <fullyQualifiedTypeName name="java.util.Comparator"/>
-    <fullyQualifiedTypeName name="java.util.Arrays"/>
-    <fullyQualifiedTypeName name="java.util.StringTokenizer"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="com.shinhan.util.DateUtil"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="java.util.Calendar"/>
+    <fullyQualifiedTypeName name="java.text.DecimalFormat"/>
+    <fullyQualifiedTypeName name="javax.swing.text.SimpleAttributeSet"/>
+    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+    <fullyQualifiedTypeName name="java.util.regex.Matcher"/>
+    <fullyQualifiedTypeName name="com.shinhan.day10.Car"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="java.lang.reflect.Field"/>
+    <fullyQualifiedTypeName name="java.lang.reflect.Constructor"/>
+    <fullyQualifiedTypeName name="java.net.URL"/>
+    <fullyQualifiedTypeName name="java.io.InputStream"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="com.shinhan.day10.PrintAnnotation"/>
+    <fullyQualifiedTypeName name="com.shinhan.day10.PrintService"/>
+    <fullyQualifiedTypeName name="java.util.StringTokenizer"/>
+    <fullyQualifiedTypeName name="java.lang.Math"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.time.Duration"/>
+    <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="java.util.regex.Pattern"/>
 </qualifiedTypeNameHistroy>
