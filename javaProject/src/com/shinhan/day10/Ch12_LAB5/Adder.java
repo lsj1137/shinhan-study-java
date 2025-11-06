@@ -14,16 +14,16 @@ public class Adder {
 	public int execute(String expr) {
 		int result = 0;
 		String strNum = "";
-		for (int i = 0; i < _______________; i++) {
-			char c = ________________;
+		for (int i = 0; i < expr.length(); i++) {
+			char c = expr.charAt(i);
 			if (c == '+') {
 				result += Integer.parseInt(strNum);
-				strNum = ______________;
+				strNum = "";
 			} else {
-				strNum += ______________;
+				strNum += c;
 			}
 		}
-		return (result + __________________);
+		return (result + Integer.parseInt(strNum));
 	}
 
 }
