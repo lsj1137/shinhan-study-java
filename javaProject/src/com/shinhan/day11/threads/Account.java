@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Account {
+public class Account implements Comparable<Account>{
 	private String accNo;
 	private String owner;
 	private int balance;
@@ -27,6 +27,12 @@ public class Account {
 			System.out.println("출금실패");
 			return 0;
 		}
+	}
+	@Override
+	public int compareTo(Account o) {
+		if (accNo.compareTo(o.accNo)==0 && owner.compareTo(o.owner)==0) return o.balance-balance;
+		if (accNo.compareTo(o.accNo)==0) return owner.compareTo(o.owner);
+		return accNo.compareTo(o.accNo);
 	}
 
 }

@@ -1,7 +1,7 @@
-# shinhan-study-java
+# 신한 DS 아카데미
 
 ## 01 주차
-### 자바 프로그래밍 기초
+### 0. 자바 프로그래밍 기초
 환경 세팅 (JDK 설치, 환경변수 설정, 이클립스 설치, 프로젝트 생성)
 ### 1. 변수
 자료형
@@ -16,7 +16,7 @@ if
 while
 do while
 
-## 2주차
+## 02 주차
 ### 1. 클래스 (Class)
 필드 (Field)
 생성자 (Constructor)
@@ -32,13 +32,53 @@ do while
 
 ### 2. 인터페이스 (Interface)
 - 다중 구현
-
 - 중첩 클래스 (Nested Class)
 
 
-## 3주차
-### 1. 예외처리
-try-catch-finally
-Exception, Runtime Exception
+## 03 주차
+### 1. 예외처리 (Exception)
+- try-catch-finally
+- Exception, Runtime Exception
 
 ### 2. 롬복 (Lombok)
+- Getter, Setter
+- AllArgsConstructor
+- NoArgsContructor
+- ToString
+- Data
+
+### 3. 모듈 (Module)
+- Object
+- System
+- String
+- Math
+- 날짜 (Date, LocalDate, LocalDateTime, ...)
+- 정규표현식 (RegEx)
+- Pattern, Matcher
+- Reflection
+
+### 4. 제네릭 (Generic)
+
+### 5. 멀티 쓰레드 (MultiThread)
+- Thread 상속, Runnable 구현
+- 동시성 문제 (락, Lock)
+    - synchronized
+    - wait-notify
+    - try-catch & interrupt
+- 쓰레드풀
+- 데몬쓰레드 (Daemon Thread)
+
+### 6. 컬렉션 (Collection)
+- 리스트 (List)
+    - ArrayList
+    - Vector (synchronized method 이용해 멀티스레드 환경에서 안전)
+    - LinkedList
+- 집합 (Set)
+    - HashSet
+    - TreeSet (순서 있음)
+- 맵 (Map)
+    - HashMap
+    - HashTable
+    - TreeMap
+    - Properties
+- Comparator
