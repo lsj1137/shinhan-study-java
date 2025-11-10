@@ -82,3 +82,16 @@ do while
     - TreeMap
     - Properties
 - Comparator
+
+## 04주차
+
+### 6. 컬렉션 (Colleciton) (계속, Continue)
+- Stack
+- Queue
+- Collections.synchronized~
+    - List
+    - Map
+    - Set
+
+### 7. 람다식 (Lambda)
+- @FunctionalInterface 어노테이션 있으면 대체 가능
