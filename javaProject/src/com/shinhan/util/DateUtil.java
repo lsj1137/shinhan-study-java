@@ -11,7 +11,7 @@ public class DateUtil {
 		return dt2;
 	}
 	public static java.sql.Date convertToSQLDate(String dt) {
-		SimpleDateFormat sdf = new SimpleDateFormat("");
+		SimpleDateFormat sdf = new SimpleDateFormat("y-M-d");
 		Date d;
 		java.sql.Date dt2 = null;
 		try {

@@ -95,3 +95,10 @@ do while
 
 ### 7. 람다식 (Lambda)
 - @FunctionalInterface 어노테이션 있으면 대체 가능
+
+
+# MVC2 모델 실습
+Controller <-> Service <-> DAO <-> DB
+모델은 DTO
+Employees 테이블 CRUD
+Departments 테이블 CRUD

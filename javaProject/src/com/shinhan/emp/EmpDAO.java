@@ -1,5 +1,6 @@
 package com.shinhan.emp;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -7,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.shinhan.util.DBUtil;
 
@@ -35,6 +38,8 @@ select * from employees
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, st, rs);
 		}
 		
 		return empList;
@@ -63,6 +68,8 @@ where employee_id = ?
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, st, rs);
 		}
 		
 		return emp;
@@ -93,6 +100,8 @@ where department_id = ?
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, st, rs);
 		}
 		
 		return empList;
@@ -129,6 +138,8 @@ or hire_date >= ?
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, st, rs);
 		}
 		
 		return empList;
@@ -148,6 +159,165 @@ or hire_date >= ?
 		emp.setPhone_number(rs.getString("Phone_number"));
 		emp.setSalary(rs.getDouble("Salary"));
 		return emp;
+	}
+
+	public String insert(EmpDTO emp) {
+		String message = null;
+
+		Connection conn = null;
+		PreparedStatement st = null;
+		String query = """
+insert into employees
+values (?,?,?,?,?,?,?,?,?,?,?)
+""";
+		
+		try {
+			conn = DBUtil.dbConnect();
+			st = conn.prepareStatement(query);
+			st.setInt(1, emp.getEmployee_id());
+			st.setString(2, emp.getFirst_name());
+			st.setString(3, emp.getLast_name());
+			st.setString(4, emp.getEmail());
+			st.setString(5, emp.getPhone_number());
+			st.setDate(6, emp.getHire_date());
+			st.setString(7, emp.getJob_id());
+			st.setDouble(8, emp.getSalary());
+			st.setDouble(9, emp.getCommission_pct());
+			st.setInt(10, emp.getManager_id());
+			st.setInt(11, emp.getDepartment_id());
+			int result = st.executeUpdate(); // insert, delete, update는 executeUpdate()
+			message = result + "건 입력 완료";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			message = "입력 실패";
+		} finally {
+			DBUtil.dbDisconnect(conn, st, null);
+		}
+		
+		return message;
+	}
+
+	public String insertRequired(EmpDTO emp) {
+		String message = null;
+
+		Connection conn = null;
+		PreparedStatement st = null;
+		String query = """
+insert into employees (EMPLOYEE_ID, LAST_NAME, EMAIL, HIRE_DATE, JOB_ID)
+values (?,?,?,?,?)
+""";
+		
+		try {
+			conn = DBUtil.dbConnect();
+			st = conn.prepareStatement(query);
+			st.setInt(1, emp.getEmployee_id());
+			st.setString(2, emp.getLast_name());
+			st.setString(3, emp.getEmail());
+			st.setDate(4, emp.getHire_date());
+			st.setString(5, emp.getJob_id());
+			int result = st.executeUpdate(); // insert, delete, update는 executeUpdate()
+			message = result + "건 입력 완료";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			message = "입력 실패";
+		} finally {
+			DBUtil.dbDisconnect(conn, st, null);
+		}
+		
+		return message;
+	}
+
+	public String update(EmpDTO modifiedEmp) {
+		String message = null;
+
+		Connection conn = null;
+		PreparedStatement st = null;
+		String sql = new String("""
+update employees set
+first_name=?, last_name=?, email=?, phone_number=?, hire_date=?,
+salary=?, commission_pct=?, manager_id=?, department_id=? 
+where employee_id = ?
+""");
+		try {
+			conn = DBUtil.dbConnect();
+			st = conn.prepareStatement(sql);
+			st.setString(1, modifiedEmp.getFirst_name());
+			st.setString(2, modifiedEmp.getLast_name());
+			st.setString(3, modifiedEmp.getEmail());
+			st.setString(4, modifiedEmp.getPhone_number());
+			st.setDate(5, modifiedEmp.getHire_date());
+			st.setDouble(6, modifiedEmp.getSalary());
+			st.setDouble(7, modifiedEmp.getCommission_pct());
+			st.setInt(8, modifiedEmp.getManager_id());
+			st.setInt(9, modifiedEmp.getDepartment_id());
+			st.setInt(10, modifiedEmp.getEmployee_id());
+			int result = st.executeUpdate(); // insert, delete, update는 executeUpdate()
+			message = result + "건 수정 완료";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			message = "수정 실패";
+		} finally {
+			DBUtil.dbDisconnect(conn, st, null);
+		}
+		
+		return message;
+	}
+
+	public String delete(int empId) {
+		String message = null;
+		Connection conn = null;
+		PreparedStatement st = null;
+		String sql = """
+delete
+from employees
+where employee_id = ?
+""";
+		try {
+			conn = DBUtil.dbConnect();
+			conn.setAutoCommit(false);
+			st = conn.prepareStatement(sql);
+			st.setInt(1, empId);
+			int result = st.executeUpdate(); // insert, delete, update는 executeUpdate()
+			message = result + "건 삭제 완료";
+			conn.commit();
+		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+			message = "삭제 실패";
+		} finally {
+			DBUtil.dbDisconnect(conn, st, null);
+		}
+		
+		return message;
+	}
+
+	public Map<String, Object> sp_call(int empId, int salary) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Connection conn = null;
+		CallableStatement st = null;
+		String sql = "{ call sp_2(?,?,?)}";
+		try {
+			conn = DBUtil.dbConnect();
+			st = conn.prepareCall(sql);
+			st.setInt(1, empId);
+			st.registerOutParameter(2, java.sql.Types.VARCHAR);
+			st.setInt(3, salary);
+			st.registerOutParameter(3, java.sql.Types.INTEGER);
+			st.execute();
+			String jobId = st.getString(2);
+			int newSalary = st.getInt(3);
+			resultMap.put("jobId", jobId);
+			resultMap.put("salary", newSalary);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return resultMap;
 	}
 	
 }
