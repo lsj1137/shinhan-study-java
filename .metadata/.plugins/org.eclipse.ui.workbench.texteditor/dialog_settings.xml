@@ -4,6 +4,8 @@
 	<section name="java.lang.Class">
 		<item key="replaceBarOpen" value="false"/>
 		<list key="findhistory">
+			<item value="insert"/>
+			<item value="잘못된"/>
 			<item value="sc.close();"/>
 			<item value="close"/>
 			<item value="Scanner"/>

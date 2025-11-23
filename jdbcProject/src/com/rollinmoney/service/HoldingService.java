@@ -17,5 +17,13 @@ public class HoldingService {
 	public String buyStock(MemberDTO member, StockDTO stock, int quantity) {
 		return holdingDAO.buyStock(member, stock, quantity);
 	}
+
+	public List<HoldingDTO> getAllStocks(Long loggedInMemberId) {
+		return holdingDAO.getAllStocks(loggedInMemberId);
+	}
+
+	public String sellStock(MemberDTO member, StockDTO stockToSell, HoldingDTO holdingToSell, int quantity) {
+		return holdingDAO.sellStock(member, stockToSell, holdingToSell, quantity);
+	}
 	
 }

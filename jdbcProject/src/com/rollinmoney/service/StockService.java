@@ -1,10 +1,12 @@
 package com.rollinmoney.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.rollinmoney.api.KisApiManager;
 import com.rollinmoney.dao.StockDAO;
+import com.rollinmoney.dto.HoldingDTO;
 import com.rollinmoney.dto.StockDTO;
 
 public class StockService {
@@ -43,6 +45,10 @@ public class StockService {
 	public List<StockDTO> getUSStocks() {
 		return stockDAO.getUSStocks();
 	}
+	
+	public StockDTO findById(long id) {
+		return stockDAO.findById(id);
+	}
 
 	public List<StockDTO> findByName(String name) {
 		return stockDAO.findByName(name);
@@ -50,6 +56,14 @@ public class StockService {
 
 	public List<StockDTO> findByTicker(String ticker) {
 		return stockDAO.findByTicker(ticker);
+	}
+
+	public List<StockDTO> getPersonalStocks(List<HoldingDTO> holdingStockList) {
+		List<StockDTO> stocks = new ArrayList<StockDTO>();
+		for (HoldingDTO holding: holdingStockList) {
+			stocks.add(stockDAO.findById(holding.getProductId()));
+		}
+		return stocks;
 	}
 	
 }

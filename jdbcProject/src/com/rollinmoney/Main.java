@@ -3,6 +3,7 @@ package com.rollinmoney;
 import java.util.List;
 
 import com.rollinmoney.constant.Messages;
+import com.rollinmoney.dto.HoldingDTO;
 import com.rollinmoney.dto.MemberDTO;
 import com.rollinmoney.dto.StockDTO;
 import com.rollinmoney.service.HoldingService;
@@ -50,6 +51,7 @@ public class Main {
 	}
 
 	static void mainMenu() {
+		member = memberService.refresh(loggedInMemberId);
 		OnboardingView.showMainMenu();
 		int cmd = IOUtil.inputInt();
 		// 1. 내 자산조회 | 2. 주식 메뉴 | 3. 은행 메뉴 | 4. 자산 변동 기록 | 5. 로그아웃
@@ -186,32 +188,38 @@ public class Main {
 
 	private static void sellStock() {
 		StockDTO stockToSell = null;
-		System.out.print("매도할 주식의 티커 >> ");
+		HoldingDTO holdingToSell = null;
+		List<HoldingDTO> holdingStockList = holdingService.getAllStocks(loggedInMemberId);
+		List<StockDTO> stockInfos = stockService.getPersonalStocks(holdingStockList);
+		HoldingView.printStocks(holdingStockList, stockInfos);
+		System.out.print("매도할 주식의 티커를 입력하세요 >> ");
 		String ticker = IOUtil.inputStr();
-		List<StockDTO> stockList = stockService.findByTicker(ticker);
-		if (stockList.size() == 1) {
-			stockToSell = stockList.get(0);
-		} else if (stockList.size() > 0) {
-			StockView.printStockList(stockList);
-			System.out.print("이 중 구매할 항목의 티커를 정확히 입력해주십시오 >> ");
-			String ticker2 = IOUtil.inputStr();
-			for (StockDTO stock : stockList) {
-				if (stock.getTicker().equals(ticker2)) {
-					stockToSell = stock;
-				}
+		for (StockDTO stockInfo : stockInfos) {
+			if (stockInfo.getTicker().equals(ticker)) {
+				stockToSell = stockInfo;
 			}
 		}
 		if (stockToSell == null) {
-			System.out.println("구매할 항목이 존재하지 않습니다.");
+			System.out.println("매도할 항목이 존재하지 않습니다.");
 			return;
 		}
-		System.out.println("다음 항목을 구매합니다.");
+		for (HoldingDTO holding: holdingStockList) {
+			if (holding.getProductId()==stockToSell.getProductId()) {
+				holdingToSell = holding;
+				break;
+			}
+		}
+		if (holdingToSell == null) {
+			System.out.println("매도할 항목을 보유하고 있지 않습니다.");
+			return;
+		}
+		System.out.println("다음 항목을 매도합니다.");
 		StockView.printStock(stockToSell);
-		System.out.print("구매할 수량 (취소 하려면 음수 입력) >> ");
+		System.out.print("매도할 수량 (현재 보유: "+holdingToSell.getQuantity()+") (취소 하려면 음수 입력) >> ");
 		int quantity = IOUtil.inputInt();
-		if (quantity < 0)
+		if (quantity < 0 || quantity > holdingToSell.getQuantity())
 			return;
 		
-		System.out.println(holdingService.buyStock(member, stockToSell, quantity));
+		System.out.println(holdingService.sellStock(member, stockToSell, holdingToSell, quantity));
 	}
 }

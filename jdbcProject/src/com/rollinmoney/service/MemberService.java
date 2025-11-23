@@ -28,5 +28,9 @@ public class MemberService {
 		}
 		return member;
 	}
+	
+	public MemberDTO refresh(Long memberId) {
+		return memberDAO.getMemberById(memberId);
+	}
 
 }

@@ -32,6 +32,11 @@ select *
 from stocks join products using (product_id)
 where ticker like ?
 """;
+	static final String SQL_SELECT_WITH_ID = """
+select *
+from stocks join products using (product_id)
+where product_id = ?
+""";
 	
 	private StockDTO makeStock(ResultSet rs) throws SQLException {
 		StockDTO stock = new StockDTO();
@@ -122,7 +127,6 @@ where ticker like ?
         boolean isSuccess = false;
 
         try {
-            // 1. DB 연결
             conn = DBUtil.dbConnect();
             
             // 두 테이블(Products, Stocks)에 모두 성공적으로 들어가야만 저장하도록 오토커밋 끄기
@@ -236,6 +240,29 @@ where ticker like ?
 		return stockList;
 	}
 
+    // 해당 종목이 이미 DB에 있는지 체크
+    public StockDTO findById(long id) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        StockDTO stock = null;
+
+        try {
+            conn = DBUtil.dbConnect();
+            pstmt = conn.prepareStatement(SQL_SELECT_WITH_ID);
+            pstmt.setLong(1, id);
+            rs = pstmt.executeQuery();
+			while (rs.next()) {
+				stock = makeStock(rs);
+			}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.dbDisconnect(conn, pstmt, rs);
+        }
+        return stock;
+    }
+    
 	public List<StockDTO> findByName(String name) {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -282,8 +309,4 @@ where ticker like ?
 		return stockList;
 	}
 
-	public Object buyStock(String ticker, int quantity) {
-		
-		return null;
-	}
 }

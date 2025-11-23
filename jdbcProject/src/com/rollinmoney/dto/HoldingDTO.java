@@ -17,6 +17,7 @@ import lombok.ToString;
 public class HoldingDTO {
 	long holdingId;
 	long productId;
+	String productType;
 	long memberId;
 	Integer quantity;
 	Date buyDate;
