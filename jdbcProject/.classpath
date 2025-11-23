@@ -6,17 +6,17 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/shinhan/eclipse/lombok.jar">
+	<classpathentry kind="lib" path="C:/Users/lsj11/OneDrive/바탕 화면/User/dev/shinhan-study-java/jdbcProject/lib/lombok.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/fzaca/Downloads/gson-2.10.1.jar">
+	<classpathentry kind="lib" path="C:/Users/lsj11/OneDrive/바탕 화면/User/dev/shinhan-study-java/jdbcProject/lib/gson-2.10.1.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/fzaca/Downloads/ojdbc8.jar">
+	<classpathentry kind="lib" path="C:/Users/lsj11/OneDrive/바탕 화면/User/dev/shinhan-study-java/jdbcProject/lib/ojdbc8.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

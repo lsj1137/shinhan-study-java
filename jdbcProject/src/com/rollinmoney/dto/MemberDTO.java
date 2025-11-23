@@ -13,6 +13,7 @@ import lombok.ToString;
 @ToString
 @Getter @Setter
 public class MemberDTO {
-	Long memberId;
-	BigDecimal cash;
+	private Long memberId;
+	private String name;
+	private BigDecimal cash;
 }

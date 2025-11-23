@@ -1,3 +1,0 @@
-app=javaproject
-userid=012.3xun
-userpw=1234qwer

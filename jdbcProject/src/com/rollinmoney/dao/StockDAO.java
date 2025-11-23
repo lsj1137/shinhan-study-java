@@ -4,11 +4,46 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.rollinmoney.dto.StockDTO;
 import com.rollinmoney.util.DBUtil;
 
 public class StockDAO {
+	static final String SQL_SELECT_KOR_STOCKS = """
+select *
+from stocks join products using (product_id)
+where product_id>7763
+""";
+	static final String SQL_SELECT_US_STOCKS = """
+select *
+from stocks join products using (product_id)
+where product_id<7764
+""";
+	static final String SQL_SELECT_WITH_NAME = """
+select *
+from stocks join products using (product_id)
+where product_NAME like ?
+""";
+	static final String SQL_SELECT_WITH_TICKER = """
+select *
+from stocks join products using (product_id)
+where ticker like ?
+""";
+	
+	private StockDTO makeStock(ResultSet rs) throws SQLException {
+		StockDTO stock = new StockDTO();
+		stock.setProductId(rs.getLong("Product_id"));
+		stock.setProductType(rs.getString("Product_type"));
+		stock.setProductName(rs.getString("Product_name"));
+		stock.setCurPrice(rs.getBigDecimal("st_cur_price"));
+		stock.setTicker(rs.getString("ticker"));
+		stock.setAbrvName(rs.getString("st_abrv_name"));
+		stock.setEngName(rs.getString("st_eng_name"));
+		return stock;
+	}
 	
 	// 통합 메서드
     public void saveOrUpdate(StockDTO stock) {
@@ -48,7 +83,7 @@ public class StockDAO {
         return exists;
     }
 
-    // 3. 가격만 업데이트 (UPDATE)
+    // 가격만 업데이트
     public void updateStockPrice(StockDTO stock) {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -90,16 +125,11 @@ public class StockDAO {
             // 1. DB 연결
             conn = DBUtil.dbConnect();
             
-            // [핵심] 트랜잭션 시작: 자동 커밋을 끕니다.
-            // 두 테이블(Products, Stocks)에 모두 성공적으로 들어가야만 저장하기 위함입니다.
+            // 두 테이블(Products, Stocks)에 모두 성공적으로 들어가야만 저장하도록 오토커밋 끄기
             conn.setAutoCommit(false);
 
-            // ==========================================
-            // STEP 1: PRODUCTS 테이블에 먼저 저장 (부모)
-            // ==========================================
             String sqlProduct = "INSERT INTO PRODUCTS (PRODUCT_TYPE, PRODUCT_NAME) VALUES ('STOCK', ?)";
             
-            // Oracle 11g/Trigger 사용 시: 생성된 키(PRODUCT_ID)를 돌려받겠다고 명시해야 함
             pstmtProduct = conn.prepareStatement(sqlProduct, new String[]{"PRODUCT_ID"});
             
             pstmtProduct.setString(1, stock.getProductName());
@@ -114,9 +144,6 @@ public class StockDAO {
                 throw new SQLException("PRODUCT_ID 생성 실패");
             }
 
-            // ==========================================
-            // STEP 2: STOCKS 테이블에 저장 (자식)
-            // ==========================================
             String sqlStock = "INSERT INTO STOCKS (PRODUCT_ID, TICKER, ST_CUR_PRICE, ST_ABRV_NAME, ST_ENG_NAME) "
                             + "VALUES (?, ?, ?, ?, ?)";
             
@@ -161,4 +188,102 @@ public class StockDAO {
         
         return isSuccess;
     }
+
+	public List<StockDTO> getKorStocks() {
+		Connection conn = null;
+		Statement st = null;
+		ResultSet rs = null;
+		List<StockDTO> stockList = new ArrayList<>();
+		try {
+			conn = DBUtil.dbConnect();
+			st = conn.createStatement();
+			rs = st.executeQuery(SQL_SELECT_KOR_STOCKS);
+			while (rs.next()) {
+				StockDTO newStock = makeStock(rs);
+				stockList.add(newStock);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, st, rs);
+		}
+		
+		return stockList;
+	}
+
+	public List<StockDTO> getUSStocks() {
+		Connection conn = null;
+		Statement st = null;
+		ResultSet rs = null;
+		List<StockDTO> stockList = new ArrayList<>();
+		
+		try {
+			conn = DBUtil.dbConnect();
+			st = conn.createStatement();
+			rs = st.executeQuery(SQL_SELECT_US_STOCKS);
+			while (rs.next()) {
+				StockDTO newStock = makeStock(rs);
+				stockList.add(newStock);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, st, rs);
+		}
+		
+		return stockList;
+	}
+
+	public List<StockDTO> findByName(String name) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+		List<StockDTO> stockList = new ArrayList<>();
+
+        try {
+            conn = DBUtil.dbConnect();
+            pstmt = conn.prepareStatement(SQL_SELECT_WITH_NAME);
+            pstmt.setString(1, "%"+name+"%");
+            rs = pstmt.executeQuery();
+			while (rs.next()) {
+				StockDTO newStock = makeStock(rs);
+				stockList.add(newStock);
+			}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.dbDisconnect(conn, pstmt, rs);
+        }
+		return stockList;
+	}
+
+	public List<StockDTO> findByTicker(String ticker) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+		List<StockDTO> stockList = new ArrayList<>();
+
+        try {
+            conn = DBUtil.dbConnect();
+            pstmt = conn.prepareStatement(SQL_SELECT_WITH_TICKER);
+            pstmt.setString(1, "%"+ticker+"%");
+            rs = pstmt.executeQuery();
+			while (rs.next()) {
+				StockDTO newStock = makeStock(rs);
+				stockList.add(newStock);
+			}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.dbDisconnect(conn, pstmt, rs);
+        }
+		return stockList;
+	}
+
+	public Object buyStock(String ticker, int quantity) {
+		
+		return null;
+	}
 }

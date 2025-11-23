@@ -9,7 +9,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @ToString
 @Getter @Setter
 public class StockDTO extends ProductDTO {
@@ -17,6 +16,10 @@ public class StockDTO extends ProductDTO {
 	private String ticker;
 	private String abrvName;
 	private String engName;
+	
+	public StockDTO() {
+		super(null, "STOCK", null);
+	}
 	
 	public StockDTO(String productName, String ticker, BigDecimal curPrice, String abrvName, String engName) {
 		// 부모 생성자 호출 (ID는 null, 타입은 "STOCK" 고정, 이름은 받아서 넘김)
