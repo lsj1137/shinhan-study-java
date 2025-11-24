@@ -1,7 +1,7 @@
 package com.rollinmoney.dto;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,8 +14,10 @@ import lombok.ToString;
 @ToString
 @Getter @Setter
 public class HistoryDTO {
-	long historyId;
-	long memberId;
-	Date recordDate;
-	BigDecimal total_asset;
+	private long historyId;
+	private long memberId;
+	private Timestamp recordDate;
+	private BigDecimal totalAsset;
+	private String actionType;
+	private String productName;
 }

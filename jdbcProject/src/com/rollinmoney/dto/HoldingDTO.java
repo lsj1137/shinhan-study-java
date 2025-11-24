@@ -15,14 +15,14 @@ import lombok.ToString;
 @ToString
 @Getter @Setter
 public class HoldingDTO {
-	long holdingId;
-	long productId;
-	String productType;
-	long memberId;
-	Integer quantity;
-	Date buyDate;
-	BigDecimal buyPrice;
-	BigDecimal buyAmount;
-	Date maturedAt;
+	private long holdingId;
+	private long productId;
+	private String productType;
+	private long memberId;
+	private Integer quantity;
+	private Date buyDate;
+	private BigDecimal buyPrice;
+	private BigDecimal buyAmount;
+	private Date maturedAt;
 	
 }

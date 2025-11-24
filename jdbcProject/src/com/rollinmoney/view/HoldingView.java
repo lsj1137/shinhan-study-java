@@ -3,22 +3,24 @@ package com.rollinmoney.view;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.rollinmoney.api.KisApiManager;
 import com.rollinmoney.dto.BankProductDTO;
 import com.rollinmoney.dto.HoldingDTO;
 import com.rollinmoney.dto.MemberDTO;
 import com.rollinmoney.dto.StockDTO;
 import com.rollinmoney.service.StockService;
 import com.rollinmoney.util.Calculator;
+import com.rollinmoney.util.StringUtil;
 
 public class HoldingView {
 	static StockService stockService = new StockService();
 
 	public static void printHoldings(MemberDTO member, List<HoldingDTO> allHoldings) {
-		System.out.println("┌ 보유 자산 현황 ───────────────────────────────────────");
+		System.out.println("\n┌ 보유 자산 현황 ───────────────────────────────────────");
 		BigDecimal total = member.getCash();
-		System.out.println("│ 현금 | " + total + "원");
+		System.out.println("│ 현금 | " + StringUtil.formatNumber(total) + "원");
 		if (allHoldings == null || allHoldings.size() == 0) {
-			System.out.println("그 외 보유한 주식/은행 자산이 없습니다.");
+			System.out.println("│ 그 외 보유한 주식/은행 자산이 없습니다.");
 			return;
 		}
 
@@ -26,17 +28,19 @@ public class HoldingView {
 			total = total.add(holding.getBuyAmount());
 			if (holding.getProductType().equals("STOCK")) {
 				StockDTO stock = stockService.findById(holding.getProductId());
-				BigDecimal profit = Calculator.calProfit(holding.getBuyPrice(), stock.getCurPrice(),
-						holding.getQuantity());
+				BigDecimal profit = Calculator.calProfit(holding.getBuyPrice(), stock.getCurPrice(), holding.getQuantity());
+				String strCurPrice = StringUtil.formatNumber(stock.getCurPrice());
+				String strProfit = StringUtil.formatNumber(profit);
 				System.out.println("│ 주식 | " + stock.getProductName() + " | 수량: " + holding.getQuantity() + " | 평단가: "
-						+ holding.getBuyPrice() + " | 현재가: " + stock.getCurPrice() + " | 차익: " + profit);
+						+ holding.getBuyPrice() + " | 현재가: " + strCurPrice + " | 차익: " + strProfit);
 				total = total.add(profit);
 			} else {
 				BankProductDTO bank = null;
-				System.out.println("│ 은행 | " + bank.getProductName() + " | 납입 금액: " + holding.getBuyAmount());
+				String strBuyAmount = StringUtil.formatNumber(holding.getBuyAmount());
+				System.out.println("│ 은행 | " + bank.getProductName() + " | 납입 금액: " + strBuyAmount);
 			}
 		}
-		System.out.println("└ 총 평가 금액: " + total + "원");
+		System.out.println("└ 총 평가 금액: " + StringUtil.formatNumber(total) + "원");
 
 	}
 
@@ -56,10 +60,14 @@ public class HoldingView {
 				}
 			}
 			BigDecimal profit = Calculator.calProfit(holding.getBuyPrice(), stock.getCurPrice(), holding.getQuantity());
+			String strCurPrice = StringUtil.formatNumber(stock.getCurPrice());
+			String strProfit = StringUtil.formatNumber(profit);
+			String strBuyPrice = StringUtil.formatNumber(holding.getBuyPrice());
 			System.out.println("│ " + stock.getTicker() + " | " + stock.getProductName() + " | 수량: "
-					+ holding.getQuantity() + " | 평단가: " + holding.getBuyPrice() + " | 현재가: " + stock.getCurPrice()
-					+ " | 차익: " + profit);
+					+ holding.getQuantity() + " | 평단가: " + strBuyPrice + " | 현재가: " + strCurPrice
+					+ " | 차익: " + strProfit);
 		}
+		System.out.println("└───────");
 
 	}
 

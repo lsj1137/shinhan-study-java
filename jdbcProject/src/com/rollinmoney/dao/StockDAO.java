@@ -96,7 +96,7 @@ where product_id = ?
         try {
             conn = DBUtil.dbConnect();
             
-            // 현재가(ST_CUR_PRICE)만 수정
+            // 현재가만 수정
             String sql = "UPDATE STOCKS SET ST_CUR_PRICE = ? WHERE TICKER = ?";
             
             pstmt = conn.prepareStatement(sql);
@@ -104,12 +104,8 @@ where product_id = ?
             pstmt.setString(2, stock.getTicker());
             
             int result = pstmt.executeUpdate();
-            
-            if (result > 0) {
-                System.out.println("🔄 [" + stock.getAbrvName() + "] 가격 갱신 완료: " + stock.getCurPrice());
-                // update는 자동 커밋(Auto Commit) 써도 무방하지만, 명시적으로 하려면:
-                // conn.commit(); (DBUtil 연결이 AutoCommit true 상태라면 생략 가능)
-            }
+
+//            System.out.println("🔄 [" + stock.getAbrvName() + "] 가격 갱신 완료: " + stock.getCurPrice());
 
         } catch (SQLException e) {
             e.printStackTrace();

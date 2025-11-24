@@ -1,5 +1,8 @@
 package com.rollinmoney.util;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 public class StringUtil {
 	public static String getPaddingString(String original, int targetWidth) {
 	    if (original == null) original = "";
@@ -37,4 +40,18 @@ public class StringUtil {
 
 	    return sb.toString();
 	}
+	
+	public static String formatNumber(long number) {
+        // "###,###" 또는 "#,###" 패턴을 사용합니다.
+        // #은 해당 자리에 숫자가 없으면 표시하지 않음을 의미합니다.
+        DecimalFormat formatter = new DecimalFormat("#,###"); 
+        
+        return formatter.format(number);
+    }
+
+	public static String formatNumber(BigDecimal number) {
+        DecimalFormat formatter = new DecimalFormat("#,###"); 
+        
+        return formatter.format(number);
+    }
 }

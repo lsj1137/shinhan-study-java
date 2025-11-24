@@ -6,11 +6,14 @@ import com.rollinmoney.constant.Messages;
 import com.rollinmoney.dto.HoldingDTO;
 import com.rollinmoney.dto.MemberDTO;
 import com.rollinmoney.dto.StockDTO;
+import com.rollinmoney.service.HistoryService;
 import com.rollinmoney.service.HoldingService;
 import com.rollinmoney.service.MemberService;
 import com.rollinmoney.service.StockService;
 import com.rollinmoney.util.IOUtil;
+import com.rollinmoney.util.StringUtil;
 import com.rollinmoney.view.BankView;
+import com.rollinmoney.view.HistoryView;
 import com.rollinmoney.view.HoldingView;
 import com.rollinmoney.view.OnboardingView;
 import com.rollinmoney.view.StockView;
@@ -18,17 +21,16 @@ import com.rollinmoney.view.StockView;
 //import com.rollinmoney.util.StockDataInitializer;
 
 public class Main {
-
 	private static Long loggedInMemberId = 0L;
 	static MemberDTO member = null;
 	private static MemberService memberService = new MemberService();
 	private static HoldingService holdingService = new HoldingService();
 	private static StockService stockService = new StockService();
+	private static HistoryService historyService = new HistoryService();
 
 	public static void main(String[] args) {
 //		StockDataInitializer.init(); // 주식 데이터 디비에 입력
 		OnboardingView.printTitle();
-
 		while (true) {
 			if (loggedInMemberId == 0) {
 				introMenu();
@@ -56,10 +58,10 @@ public class Main {
 		int cmd = IOUtil.inputInt();
 		// 1. 내 자산조회 | 2. 주식 메뉴 | 3. 은행 메뉴 | 4. 자산 변동 기록 | 5. 로그아웃
 		switch (cmd) {
-		case 1 -> HoldingView.printHoldings(member, holdingService.getAllHoldings(loggedInMemberId));
+		case 1 -> {HoldingView.printHoldings(member, holdingService.getAllHoldings(loggedInMemberId));}
 		case 2 -> stockMenu();
 		case 3 -> bankMenu();
-		case 4 -> System.out.println(">> [변동 기록] 기능은 아직 공사 중이에요 🚧");
+		case 4 -> HistoryView.printHistory(historyService.loadHistory(member));
 		case 5 -> logout();
 		default -> System.out.println(Messages.WRONG_INPUT);
 		}
@@ -93,12 +95,20 @@ public class Main {
 			case 3 -> {
 				System.out.print("찾고 싶은 주식 이름 입력 >> ");
 				String name = IOUtil.inputStr();
-				StockView.printStockList(stockService.findByName(name));
+				if (!name.trim().isEmpty()) {
+					StockView.printStockList(stockService.findByName(name));
+				} else {
+					System.out.println(Messages.WRONG_INPUT);
+				}
 			}
 			case 4 -> {
 				System.out.print("찾고 싶은 주식 티커 입력 >> ");
 				String ticker = IOUtil.inputStr();
-				StockView.printStockList(stockService.findByTicker(ticker));
+				if (!ticker.trim().isEmpty()) {
+					StockView.printStockList(stockService.findByTicker(ticker));
+				} else {
+					System.out.println(Messages.WRONG_INPUT);
+				}
 			}
 			case 5 -> {
 				break ssm;
@@ -109,7 +119,18 @@ public class Main {
 	}
 
 	private static void bankMenu() {
-		BankView.showBankMenu();
+		bm: while (true) {
+			BankView.showBankMenu();
+			int cmd = IOUtil.inputInt();
+			// 1. 상품 목록 | 2. 가입하기 | 3. 해지하기 | 4. 뒤로 가기
+			switch (cmd) {
+			case 1 -> System.out.println(">> [상품 목록] 기능은 아직 공사 중이에요 🚧");
+			case 2 -> System.out.println(">> [가입하기] 기능은 아직 공사 중이에요 🚧");
+			case 3 -> System.out.println(">> [해지하기] 기능은 아직 공사 중이에요 🚧");
+			case 4 -> {break bm;}
+			default -> System.out.println(Messages.WRONG_INPUT);
+			}
+		}
 
 	}
 
@@ -124,8 +145,9 @@ public class Main {
 
 		if (member != null) {
 			loggedInMemberId = member.getMemberId();
+			String strCash = StringUtil.formatNumber(member.getCash());
 			System.out
-					.println("✅ 로그인 성공!\n" + "환영합니다 " + member.getName() + "님.\n현재 잔고는 " + member.getCash() + "원입니다.");
+					.println("\n✅ 로그인 성공!\n" + "환영합니다 " + member.getName() + "님.\n현재 잔고는 " + strCash + "원입니다.");
 		}
 	}
 
@@ -136,11 +158,9 @@ public class Main {
 		Long newId = memberService.register(name);
 
 		if (newId != null) {
-			System.out.println("🎉 회원가입이 완료되었습니다!");
-			System.out.println("👉 회원님의 ID는 [" + newId + "] 입니다.");
-			System.out.println("   (로그인 시 필요하니 꼭 기억해 주세요!)");
+			OnboardingView.showRegisterDone(newId);
 		} else {
-			System.out.println("❌ 회원가입에 실패했습니다.");
+			System.out.println("회원가입에 실패했습니다.");
 		}
 	}
 
@@ -152,6 +172,7 @@ public class Main {
 
 	private static void terminate() {
 		System.out.println(Messages.GOOD_BYE);
+		stockService.shutdownExecutor();
 		System.exit(0);
 	}
 
@@ -184,6 +205,8 @@ public class Main {
 			return;
 		
 		System.out.println(holdingService.buyStock(member, stockToBuy, quantity));
+		member = memberService.refresh(loggedInMemberId);
+		System.out.println(historyService.insertHistory(member, "BUY", stockToBuy.getProductName()));
 	}
 
 	private static void sellStock() {
@@ -221,5 +244,7 @@ public class Main {
 			return;
 		
 		System.out.println(holdingService.sellStock(member, stockToSell, holdingToSell, quantity));
+		member = memberService.refresh(loggedInMemberId);
+		System.out.println(historyService.insertHistory(member, "SELL", stockToSell.getProductName()));
 	}
 }
