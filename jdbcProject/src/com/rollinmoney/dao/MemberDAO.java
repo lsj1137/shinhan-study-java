@@ -17,7 +17,7 @@ public class MemberDAO {
         try {
             conn = DBUtil.dbConnect();
             // MEMBER_ID는 트리거/시퀀스로 자동 생성되므로 NAME만 입력
-            String sql = "INSERT INTO MEMBERS (NAME, CASH) VALUES (?, 1000000)";
+            String sql = "INSERT INTO MEMBERS (NAME, CASH) VALUES (?, 100000000)";
             
             // 생성된 키(ID)를 받아오겠다고 명시
             pstmt = conn.prepareStatement(sql, new String[]{"MEMBER_ID"});
